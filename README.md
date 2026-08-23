@@ -9,15 +9,6 @@ el alumnado encadena resultados a mano.
 
 ---
 
-## Poner en marcha en GitHub Pages
-
-1. Crea un repositorio nuevo (por ejemplo `Misterio-Trofeo`) y sube todo el contenido de esta carpeta a la raíz.
-2. *Settings → Pages → Source*: `Deploy from a branch`, rama `main`, carpeta `/ (root)`.
-3. En un par de minutos estará en `https://TU-USUARIO.github.io/Misterio-Trofeo/`.
-
-No hace falta tocar nada más: la página carga `misterio-trofeo.db` con una ruta relativa.
-
----
 
 ## Contenido
 
@@ -48,73 +39,12 @@ solucion(usuario, valor)          -- comprobador, con trigger
 
 Las fechas son enteros `AAAAMMDD`. Ningún dato lleva tilde, para evitar problemas al teclear.
 
----
-
-## SOLUCIÓN (para el profesorado)
-
-<details>
-<summary>Desplegar</summary>
-
-**Culpable: Marcos Delgado Rueda** (`id` 193, 4ESO-A).
-
-```sql
--- 1. El parte del robo (salen dos; uno dice "Informe no encontrado")
-SELECT * FROM parte_incidencia
-WHERE fecha = 20260305 AND tipo = 'robo' AND lugar = 'Hall del instituto';
-
--- 2a. Testigo 1: el último de la lista de 1BACH-B  → Alonso Pineda Barea, id 279
-SELECT * FROM persona
-WHERE grupo = '1BACH-B'
-ORDER BY num_lista DESC
-LIMIT 1;
-
--- 2b. Testigo 2: Marisol de la calle Sierra Nevada → Marisol Cantero Ruiz, id 284
---     (hay 4 Marisol en el centro; solo una vive ahí)
-SELECT * FROM persona
-WHERE nombre LIKE 'Marisol%' AND calle = 'Sierra Nevada';
-
--- 3. Las dos declaraciones
-SELECT texto FROM declaracion WHERE id_persona = 279;   -- código del gimnasio: empieza por GB7
-SELECT texto FROM declaracion WHERE id_persona = 284;   -- excursión a Córdoba del 12/03/2026
-
--- 4a. Seis candidatos
-SELECT * FROM socio_gimnasio WHERE codigo LIKE 'GB7%';
-
--- 4b. Cruce a mano (21 inscritos a la excursión, solo uno es candidato)
-SELECT * FROM inscripcion_excursion
-WHERE destino = 'Cordoba' AND fecha = 20260312
-  AND id_persona IN (20, 51, 139, 170, 193, 282);
-
--- 5. El nombre
-SELECT * FROM persona WHERE id = 193;
-
--- 6. Comprobar
-INSERT INTO solucion VALUES (1, 'Marcos Delgado Rueda');
-SELECT valor FROM solucion;
-```
-
-Los `id` del paso 4b son los que devuelve el paso 4a; cambian si se regenera la base de datos
-con otra semilla. La comprobación final ignora mayúsculas y espacios sobrantes.
-
-</details>
-
----
-
-## Qué practica cada paso
-
-| Paso | Contenido de SQL |
-|---|---|
-| 1 | `SELECT … WHERE` con varias condiciones y `AND` |
-| 2a | `ORDER BY … DESC` + `LIMIT` |
-| 2b | `LIKE` con comodín `%` |
-| 3 | Filtrar por clave ajena (`id_persona`) |
-| 4 | `LIKE` de prefijo e `IN` con una lista de valores |
 
 ---
 
 ## Créditos
 
-Inspirado en el [SQL Murder Mystery](https://mystery.knightlab.com/) del Knight Lab de la
+Realizado por Juan Luis Torralbo e inspirado en el [SQL Murder Mystery](https://mystery.knightlab.com/) del Knight Lab de la
 Universidad Northwestern, creado por Joon Park y Cathy He y producido para la web por Joe Germuska
 ([repositorio original](https://github.com/NUKnightLab/sql-mysteries)).
 Componentes del editor de Zi Chong Kao ([Select Star SQL](https://selectstarsql.com/)).
