@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" width="1000" height="480" font-family="Verdana, Arial, sans-serif" role="img" aria-label="Diagrama del esquema: la tabla persona se relaciona con declaracion, socio_gimnasio e inscripcion_excursion mediante la columna id_persona. La tabla parte_incidencia no se relaciona con ninguna otra.">
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a2f1d"/>
+    </marker>
+    <style>
+      .caja  { fill:#fffdf8; stroke:#1d1a16; stroke-width:1.5; }
+      .barra { fill:#1d1a16; }
+      .tnom  { fill:#f6f3ec; font-size:14px; font-weight:bold; }
+      .col   { fill:#26221c; font-size:12.5px; }
+      .pk    { fill:#26221c; font-size:12.5px; font-weight:bold; }
+      .fk    { fill:#8a2f1d; font-size:12.5px; font-weight:bold; }
+      .tipo  { fill:#8a8272; font-size:11px; }
+      .rel   { stroke:#8a2f1d; stroke-width:2; fill:none; }
+      .nota  { fill:#5c5648; font-size:12px; font-style:italic; }
+      .leyenda { fill:#5c5648; font-size:12px; }
+    </style>
+  </defs>
+
+  <rect width="1000" height="480" fill="#ffffff"/>
+
+  <!-- parte_incidencia -->
+  <g>
+    <rect class="caja" x="40" y="60" width="250" height="146" rx="4"/>
+    <path class="barra" d="M40 64 a4 4 0 0 1 4 -4 h242 a4 4 0 0 1 4 4 v24 h-250 z"/>
+    <text class="tnom" x="54" y="81">parte_incidencia</text>
+    <text class="pk"   x="54" y="110">id</text>          <text class="tipo" x="230" y="110" text-anchor="end">INTEGER</text>
+    <text class="col"  x="54" y="132">fecha</text>       <text class="tipo" x="230" y="132" text-anchor="end">INTEGER</text>
+    <text class="col"  x="54" y="154">tipo</text>        <text class="tipo" x="230" y="154" text-anchor="end">TEXT</text>
+    <text class="col"  x="54" y="176">lugar</text>       <text class="tipo" x="230" y="176" text-anchor="end">TEXT</text>
+    <text class="col"  x="54" y="198">descripcion</text> <text class="tipo" x="230" y="198" text-anchor="end">TEXT</text>
+  </g>
+  <text class="nota" x="40" y="228">No se relaciona con ninguna otra tabla:</text>
+  <text class="nota" x="40" y="245">es el punto de partida del caso.</text>
+
+  <!-- persona -->
+  <g>
+    <rect class="caja" x="380" y="180" width="240" height="168" rx="4"/>
+    <path class="barra" d="M380 184 a4 4 0 0 1 4 -4 h232 a4 4 0 0 1 4 4 v24 h-240 z"/>
+    <text class="tnom" x="394" y="201">persona</text>
+    <text class="pk"   x="394" y="230">id</text>        <text class="tipo" x="606" y="230" text-anchor="end">INTEGER</text>
+    <text class="col"  x="394" y="252">nombre</text>    <text class="tipo" x="606" y="252" text-anchor="end">TEXT</text>
+    <text class="col"  x="394" y="274">grupo</text>     <text class="tipo" x="606" y="274" text-anchor="end">TEXT</text>
+    <text class="col"  x="394" y="296">num_lista</text> <text class="tipo" x="606" y="296" text-anchor="end">INTEGER</text>
+    <text class="col"  x="394" y="318">calle</text>     <text class="tipo" x="606" y="318" text-anchor="end">TEXT</text>
+    <text class="col"  x="394" y="340">numero</text>    <text class="tipo" x="606" y="340" text-anchor="end">INTEGER</text>
+  </g>
+
+  <!-- declaracion -->
+  <g>
+    <rect class="caja" x="40" y="300" width="250" height="102" rx="4"/>
+    <path class="barra" d="M40 304 a4 4 0 0 1 4 -4 h242 a4 4 0 0 1 4 4 v24 h-250 z"/>
+    <text class="tnom" x="54" y="321">declaracion</text>
+    <text class="pk"   x="54" y="350">id</text>         <text class="tipo" x="276" y="350" text-anchor="end">INTEGER</text>
+    <text class="fk"   x="54" y="372">id_persona</text> <text class="tipo" x="276" y="372" text-anchor="end">INTEGER</text>
+    <text class="col"  x="54" y="394">texto</text>      <text class="tipo" x="276" y="394" text-anchor="end">TEXT</text>
+  </g>
+
+  <!-- socio_gimnasio -->
+  <g>
+    <rect class="caja" x="700" y="60" width="250" height="124" rx="4"/>
+    <path class="barra" d="M700 64 a4 4 0 0 1 4 -4 h242 a4 4 0 0 1 4 4 v24 h-250 z"/>
+    <text class="tnom" x="714" y="81">socio_gimnasio</text>
+    <text class="pk"   x="714" y="110">codigo</text>     <text class="tipo" x="936" y="110" text-anchor="end">TEXT</text>
+    <text class="fk"   x="714" y="132">id_persona</text> <text class="tipo" x="936" y="132" text-anchor="end">INTEGER</text>
+    <text class="col"  x="714" y="154">fecha_alta</text> <text class="tipo" x="936" y="154" text-anchor="end">INTEGER</text>
+    <text class="col"  x="714" y="176">estado</text>     <text class="tipo" x="936" y="176" text-anchor="end">TEXT</text>
+  </g>
+
+  <!-- inscripcion_excursion -->
+  <g>
+    <rect class="caja" x="700" y="300" width="250" height="124" rx="4"/>
+    <path class="barra" d="M700 304 a4 4 0 0 1 4 -4 h242 a4 4 0 0 1 4 4 v24 h-250 z"/>
+    <text class="tnom" x="714" y="321">inscripcion_excursion</text>
+    <text class="pk"   x="714" y="350">id</text>         <text class="tipo" x="936" y="350" text-anchor="end">INTEGER</text>
+    <text class="fk"   x="714" y="372">id_persona</text> <text class="tipo" x="936" y="372" text-anchor="end">INTEGER</text>
+    <text class="col"  x="714" y="394">destino</text>    <text class="tipo" x="936" y="394" text-anchor="end">TEXT</text>
+    <text class="col"  x="714" y="416">fecha</text>      <text class="tipo" x="936" y="416" text-anchor="end">INTEGER</text>
+  </g>
+
+  <!-- relaciones -->
+  <path class="rel" marker-end="url(#flecha)" d="M290 368 C 340 368, 340 226, 376 226"/>
+  <path class="rel" marker-end="url(#flecha)" d="M700 128 C 660 128, 660 226, 624 226"/>
+  <path class="rel" marker-end="url(#flecha)" d="M700 368 C 660 368, 660 226, 624 226"/>
+
+  <!-- leyenda -->
+  <g>
+    <text class="pk" x="380" y="404">id</text>
+    <text class="leyenda" x="400" y="404">clave primaria</text>
+    <text class="fk" x="380" y="424">id_persona</text>
+    <text class="leyenda" x="462" y="424">clave ajena</text>
+    <text class="leyenda" x="380" y="450">Las fechas se guardan como enteros AAAAMMDD.</text>
+  </g>
+</svg>

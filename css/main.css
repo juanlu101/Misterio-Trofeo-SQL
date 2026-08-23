@@ -1,0 +1,212 @@
+/* ------------------------------------------------------------------
+   El Misterio del Asesinato en SQL — hoja de estilos autocontenida
+   (sin dependencias externas, pensada para GitHub Pages)
+------------------------------------------------------------------- */
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #26221c;
+    background: #f6f3ec;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+    background: #ece7db;
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+a { color: #8a2f1d; }
+a:hover { color: #5d1f13; }
+a:focus-visible, input:focus-visible { outline: 3px solid #8a2f1d; outline-offset: 2px; }
+
+/* Cabecera */
+
+.cabecera {
+    background: #1d1a16;
+    color: #f6f3ec;
+    text-align: center;
+    padding: 3rem 1rem 2.5rem;
+    border-bottom: 6px double #b3872f;
+}
+
+.cabecera h1 {
+    margin: 0;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    letter-spacing: 0.03em;
+    font-weight: 700;
+}
+
+.cabecera .lema {
+    margin: 0.75rem 0 0;
+    font-style: italic;
+    color: #cfc4ae;
+    font-size: 1.1rem;
+}
+
+/* Estructura */
+
+.contenedor {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 1rem 1.25rem 3rem;
+}
+
+section { margin-top: 2.5rem; }
+
+h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid #b3872f;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.ilustracion {
+    display: block;
+    max-width: 320px;
+    width: 60%;
+    margin: 1.5rem auto 0.5rem;
+    border-radius: 8px;
+}
+
+.diagrama {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    border: 1px solid #d8d2c4;
+    border-radius: 6px;
+    padding: 0.5rem;
+}
+
+.nota {
+    font-size: 0.95rem;
+    color: #5c5648;
+    border-left: 4px solid #b3872f;
+    padding-left: 0.8rem;
+}
+
+#creditos {
+    margin-top: 3.5rem;
+    border-top: 1px solid #d8d2c4;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    color: #6b6455;
+}
+
+/* Tabla de resultados */
+
+.datatable {
+    border: solid 1px grey;
+    border-collapse: collapse;
+    font-size: 15px;
+    background: #fff;
+    font-family: Verdana, Arial, sans-serif;
+}
+
+.datatable thead,
+td {
+    padding: 4px 6px;
+    border: solid 1px grey;
+}
+
+.datatable thead {
+    background: lightgrey;
+    font-weight: bold;
+}
+
+/* Componente sql-exercise */
+
+sql-exercise .sqlExHomeDiv {
+    margin: 1em 0em;
+    font-family: Verdana, Arial, sans-serif;
+    background: #fdfcf9;
+    border: 1px solid #d8d2c4;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+sql-exercise .sqlExQuestion {
+    font-weight: 700;
+}
+
+sql-exercise .sqlExComment {
+    font-weight: 200;
+    font-size: 0.9em;
+    color: #5c5648;
+}
+
+sql-exercise form { display: block; }
+
+sql-exercise .sqlExInputArea {
+    line-height: 130%;
+    min-width: 100%;
+}
+
+sql-exercise .sqlExOutputArea {
+    max-width: 100%;
+    overflow: auto;
+}
+
+sql-exercise .sqlExOutputArea .returnOkay { margin-top: 0.5em; }
+
+sql-exercise .sqlExOutputArea .returnError {
+    margin-top: 0.5em;
+    color: #a4201f;
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+}
+
+sql-exercise .CodeMirror {
+    margin: 0.5em 0em;
+    border: 1px solid #d8d2c4;
+}
+
+sql-exercise .sqlExInputArea input {
+    margin-right: 1em;
+    background: none;
+    border: 1px solid #8a8272;
+    border-radius: 4px;
+    font-size: 0.85em;
+    padding: 0.3em 0.9em;
+    cursor: pointer;
+}
+
+sql-exercise .sqlExInputArea input:hover:not(:disabled) { background: #ece7db; }
+sql-exercise .sqlExInputArea input:disabled { opacity: 0.5; cursor: wait; }
+
+sql-exercise .sqlExInputArea input.sql-exercise-submit {
+    background: #1d1a16;
+    color: #f6f3ec;
+    border-color: #1d1a16;
+    font-weight: bold;
+}
+
+sql-exercise .sqlExInputArea input.sql-exercise-submit:hover:not(:disabled) {
+    background: #3a352c;
+}
+
+/* Componente sql-quiz (no se usa en esta versión, se conserva por compatibilidad) */
+
+sql-quiz .sqlQuizHomeDiv {
+    margin: 1em 0em;
+    background: #fdfcf9;
+    padding: 6px;
+    border-radius: 6px;
+    font-weight: 200;
+}
+
+sql-quiz .sqlQuizTitle { font-weight: 700; }
+sql-quiz .sqlQuizInputArea { line-height: 130%; min-width: 100%; }
+sql-quiz .sqlQuizInputArea .sqlOption { min-width: 100%; margin: 0.5em 0em; }
+sql-quiz input[type=checkbox] { transform: scale(1.5); float: left; }
+sql-quiz .sqlOption .optionText { display: table; }
+sql-quiz .sqlOption .hintSpan { display: none; color: blue; font-weight: 200; }
+sql-quiz .sqlQuizInputArea input { margin-right: 1em; background: none; border-radius: 4px; font-size: 0.8em; font-weight: 200; }
+sql-quiz .sqlQuizOutputArea .returnOkay { margin-top: 0.5em; }

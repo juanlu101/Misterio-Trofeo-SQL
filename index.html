@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>El Misterio del Trofeo Robado</title>
+    <meta name="description" content="Caso de iniciación para practicar consultas SQL sencillas. Se resuelve sin usar JOIN.">
+
+    <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="css/neat.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/caso.css">
+
+    <script src="scripts/codemirror.js"></script>
+    <script src="scripts/codemirrorsql.js"></script>
+    <script src="scripts/autorefresh.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+        window.onload = () => loadData('misterio-trofeo.db');
+    </script>
+</head>
+
+<body>
+    <header class="cabecera">
+        <h1>El Misterio del Trofeo Robado</h1>
+        <p class="lema">Caso de iniciación &middot; se resuelve sin usar JOIN</p>
+    </header>
+
+    <main class="contenedor">
+
+        <!-- 1. EL CASO -->
+        <section id="caso">
+            <img src="vitrina.svg" class="ilustracion" alt="Una vitrina con el hueco vacío donde estaba el trofeo.">
+            <h2>El caso</h2>
+            <p>
+                El <strong>5 de marzo de 2026</strong> desapareció de la vitrina del
+                <strong>hall del instituto</strong> el trofeo del concurso de robótica. Jefatura de
+                estudios abrió un parte de incidencia, pero el parte se ha traspapelado entre los cientos
+                que hay en la base de datos del centro.
+            </p>
+            <p>
+                Tu trabajo es encontrar ese parte, seguir las pistas que contiene y averiguar
+                <strong>quién se llevó el trofeo</strong>. Cuando creas saberlo, comprueba tu respuesta
+                en la última sección de la página.
+            </p>
+            <p class="nota">
+                Las fechas se guardan como números enteros con el formato <code>AAAAMMDD</code>.
+                Por ejemplo, el 5 de marzo de 2026 se escribe <code>20260305</code>.
+            </p>
+        </section>
+
+        <!-- 2. CÓMO TRABAJAR -->
+        <section id="metodo">
+            <h2>Cómo se resuelve</h2>
+            <p>
+                Cada pista está en una tabla distinta y se obtiene con <strong>una consulta a una sola
+                tabla</strong>. El truco consiste en <em>encadenar</em>: sacas un dato de una consulta,
+                lo apuntas y lo usas en la siguiente. No necesitas <code>JOIN</code> en ningún momento.
+            </p>
+            <ol class="pasos">
+                <li>Localiza el parte de incidencia del robo en <code>parte_incidencia</code>.</li>
+                <li>Léelo con atención: te dice cómo identificar a los dos testigos.</li>
+                <li>Busca a esos testigos en <code>persona</code> y apunta sus <code>id</code>.</li>
+                <li>Consulta sus declaraciones en <code>declaracion</code>.</li>
+                <li>Cada declaración apunta a una tabla distinta. Cruza los resultados a mano.</li>
+            </ol>
+
+            <details class="bloque">
+                <summary>Recordatorio de comandos SQL</summary>
+                <table class="chuleta">
+                    <thead>
+                        <tr><th>Para…</th><th>Se escribe</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ver una tabla entera</td><td><code>SELECT * FROM persona;</code></td></tr>
+                        <tr><td>Ver solo algunas columnas</td><td><code>SELECT nombre, grupo FROM persona;</code></td></tr>
+                        <tr><td>Filtrar filas</td><td><code>SELECT * FROM persona WHERE grupo = '2ESO-A';</code></td></tr>
+                        <tr><td>Varias condiciones a la vez</td><td><code>… WHERE grupo = '2ESO-A' AND numero &gt; 20;</code></td></tr>
+                        <tr><td>Texto que empieza por algo</td><td><code>… WHERE nombre LIKE 'Marisol%';</code></td></tr>
+                        <tr><td>Texto que contiene algo</td><td><code>… WHERE texto LIKE '%gimnasio%';</code></td></tr>
+                        <tr><td>Ordenar de mayor a menor</td><td><code>… ORDER BY num_lista DESC;</code></td></tr>
+                        <tr><td>Quedarte solo con la primera fila</td><td><code>… ORDER BY num_lista DESC LIMIT 1;</code></td></tr>
+                        <tr><td>Buscar entre varios valores</td><td><code>… WHERE id_persona IN (12, 45, 78);</code></td></tr>
+                        <tr><td>Contar filas</td><td><code>SELECT COUNT(*) FROM persona;</code></td></tr>
+                    </tbody>
+                </table>
+                <p class="nota">
+                    El texto entre comillas distingue mayúsculas de minúsculas y tildes:
+                    <code>'Cordoba'</code> no es lo mismo que <code>'córdoba'</code>. En esta base de datos
+                    ningún dato lleva tilde.
+                </p>
+            </details>
+        </section>
+
+        <!-- 3. ESQUEMA -->
+        <section id="esquema">
+            <h2>Esquema de la base de datos</h2>
+            <p>
+                Estas son las tablas del centro y cómo se relacionan entre sí. Fíjate en que
+                <code>declaracion</code>, <code>socio_gimnasio</code> e <code>inscripcion_excursion</code>
+                guardan un <code>id_persona</code>: es la clave ajena que apunta al <code>id</code> de
+                <code>persona</code>.
+            </p>
+            <img src="esquema.svg" class="diagrama" alt="Diagrama del esquema con las cinco tablas y sus relaciones." width="1000" height="480">
+        </section>
+
+        <!-- 4. EDITOR -->
+        <section id="editor">
+            <h2>Editor SQL</h2>
+            <p>
+                Escribe aquí tus consultas y pulsa <strong>Ejecutar</strong> (o Mayús + Intro).
+                Puedes usar este editor tantas veces como quieras: borra la consulta anterior y prueba otra.
+            </p>
+
+            <sql-exercise
+                data-question="Investiga el caso"
+                data-comment="Empieza por buscar el parte de incidencia del robo."
+                data-default-text="SELECT *
+FROM parte_incidencia
+WHERE fecha = 20260305;"></sql-exercise>
+
+            <p>
+                ¿Atascado? Abre las pistas de una en una, solo cuando de verdad las necesites.
+            </p>
+
+            <details class="bloque">
+                <summary>Pista 1 &middot; No encuentro el parte del robo</summary>
+                <p>
+                    Con la fecha sola salen varias filas. Añade dos condiciones más con <code>AND</code>:
+                    el <code>tipo</code> de incidencia que buscas es <code>'robo'</code> y el
+                    <code>lugar</code> es <code>'Hall del instituto'</code>.
+                </p>
+                <p>
+                    Saldrán dos partes. Uno de ellos no sirve: fíjate en cuál tiene una descripción de verdad.
+                </p>
+            </details>
+
+            <details class="bloque">
+                <summary>Pista 2 &middot; No sé identificar a los testigos</summary>
+                <p>
+                    El primer testigo es de <code>1BACH-B</code> y tiene el <code>num_lista</code> más alto
+                    de su grupo: filtra por el grupo, ordena con <code>ORDER BY num_lista DESC</code> y
+                    quédate con la primera fila usando <code>LIMIT 1</code>.
+                </p>
+                <p>
+                    La segunda testigo se llama Marisol, pero hay varias en el instituto. Combina
+                    <code>nombre LIKE 'Marisol%'</code> con la calle en la que vive.
+                </p>
+            </details>
+
+            <details class="bloque">
+                <summary>Pista 3 &middot; Ya tengo los testigos, ¿y ahora?</summary>
+                <p>
+                    Apunta el <code>id</code> de cada uno y búscalos en la tabla de declaraciones:
+                    <code>SELECT texto FROM declaracion WHERE id_persona = …;</code>
+                </p>
+                <p>
+                    Una declaración te da el principio de un código de la tabla
+                    <code>socio_gimnasio</code>. La otra te da un destino y una fecha de la tabla
+                    <code>inscripcion_excursion</code>.
+                </p>
+            </details>
+
+            <details class="bloque">
+                <summary>Pista 4 &middot; Tengo las dos listas y no sé cruzarlas</summary>
+                <p>
+                    Saca primero los seis socios cuyo código empieza por <code>GB7</code> y apunta sus
+                    <code>id_persona</code>. Solo una de esas seis personas fue a la excursión.
+                </p>
+                <p>
+                    Puedes comprobarlo de dos maneras: lanzando seis consultas (una por candidato) o,
+                    más rápido, con <code>IN</code>: filtra la excursión y añade
+                    <code>AND id_persona IN (…)</code> con los seis números separados por comas.
+                </p>
+            </details>
+        </section>
+
+        <!-- 5. COMPROBAR -->
+        <section id="comprobar">
+            <h2>Comprueba tu solución</h2>
+            <p>
+                Sustituye el texto entre comillas por el nombre completo de tu sospechoso y ejecuta las
+                dos sentencias juntas.
+            </p>
+            <sql-exercise
+                data-question="¿Quién se llevó el trofeo?"
+                data-comment="Da igual si escribes en mayúsculas o en minúsculas."
+                data-default-text="INSERT INTO solucion VALUES (1, 'Escribe aqui el nombre completo');
+
+SELECT valor FROM solucion;"></sql-exercise>
+        </section>
+
+        <footer id="creditos">
+            <p>
+                Caso de iniciación inspirado en el
+                <a href="https://mystery.knightlab.com/">SQL Murder Mystery</a> del Knight Lab de la
+                Universidad Northwestern (Joon Park y Cathy He; producido para la web por Joe Germuska),
+                y pensado como paso previo a
+                <a href="https://juanlu101.github.io/Asesinato-Base-de-Datos/">El Misterio del Asesinato en SQL</a>.
+                El SQL funciona en el navegador gracias a
+                <a href="https://github.com/sql-js/sql.js/">SQL.js</a>; los componentes del editor son de
+                Zi Chong Kao (<a href="https://selectstarsql.com/">Select Star SQL</a>).
+                Código bajo licencia MIT; textos y contenido bajo
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a>.
+            </p>
+        </footer>
+
+    </main>
+</body>
+
+</html>
