@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>El misterio del trofeo robado</title>
+    <meta name="description" content="Caso de iniciación para practicar consultas SQL sencillas.">
+    <meta name="theme-color" content="#12302a">
+
+    <link rel="preload" href="fonts/courier-prime-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/codemirror.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="scripts/codemirror.js"></script>
+    <script src="scripts/codemirrorsql.js"></script>
+    <script src="scripts/autorefresh.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/pagina.js" defer></script>
+    <script>
+        window.onload = () => loadData('misterio-trofeo.db');
+    </script>
+</head>
+
+<body>
+    <header class="portada">
+        <div class="portada-interior">
+            <div class="portada-texto">
+                <p class="expediente">Parte de incidencia del 5 de marzo de 2026 <span>Jefatura de Estudios</span></p>
+                <h1>El misterio del trofeo robado</h1>
+                <p class="lema">Caso de iniciación a SQL</p>
+                <p class="autor">Caso creado por <strong>Juan Luis Torralbo Muñoz</strong></p>
+            </div>
+            <figure class="portada-imagen">
+                <svg class="vitrina" viewBox="0 0 440 360" role="img" aria-labelledby="vitrina-titulo" xmlns="http://www.w3.org/2000/svg">
+                <title id="vitrina-titulo">Una vitrina con el hueco vacío donde estaba el trofeo y, al lado, una foto de cómo era la copa.</title>
+                <defs>
+                  <linearGradient id="oro" x1="0" x2="1" y1="0" y2="0">
+                    <stop offset="0" stop-color="#8a5a12"/>
+                    <stop offset="0.28" stop-color="#e2b04a"/>
+                    <stop offset="0.45" stop-color="#fbe7a1"/>
+                    <stop offset="0.62" stop-color="#d9a237"/>
+                    <stop offset="1" stop-color="#7a4b0c"/>
+                  </linearGradient>
+                  <linearGradient id="boca" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stop-color="#5e3a08"/>
+                    <stop offset="1" stop-color="#b9832a"/>
+                  </linearGradient>
+                  <linearGradient id="cristal" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stop-color="#2a5a4e"/>
+                    <stop offset="1" stop-color="#173a32"/>
+                  </linearGradient>
+                  <linearGradient id="madera" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0" stop-color="#7a5232"/>
+                    <stop offset="1" stop-color="#4e331d"/>
+                  </linearGradient>
+                  <radialGradient id="foco" cx="0.5" cy="0" r="1">
+                    <stop offset="0" stop-color="#fff6d8" stop-opacity="0.5"/>
+                    <stop offset="1" stop-color="#fff6d8" stop-opacity="0"/>
+                  </radialGradient>
+                  <clipPath id="recorte-cristal"><rect x="122" y="40" width="196" height="244"/></clipPath>
+                </defs>
+                
+                <!-- mueble -->
+                <rect x="100" y="14" width="240" height="16" rx="3" class="marco"/>
+                <rect x="110" y="28" width="220" height="268" class="marco"/>
+                <rect x="122" y="40" width="196" height="244" fill="url(#cristal)"/>
+                <g clip-path="url(#recorte-cristal)">
+                  <ellipse cx="220" cy="40" rx="130" ry="250" fill="url(#foco)"/>
+                
+                  <!-- balda superior con otros premios -->
+                  <rect x="122" y="128" width="196" height="5" class="balda"/>
+                  <g transform="translate(160 92)">
+                    <path d="M-9,-22 L-2,0 M9,-22 L2,0" stroke="#c43c2f" stroke-width="7"/>
+                    <circle cx="0" cy="10" r="13" fill="url(#oro)"/>
+                    <circle cx="0" cy="10" r="8" fill="none" stroke="#8a5a12" stroke-width="1.5"/>
+                  </g>
+                  <g transform="translate(270 82)">
+                    <rect x="-22" y="0" width="44" height="46" rx="2" fill="#2b2b2b"/>
+                    <rect x="-16" y="6" width="32" height="26" rx="1" fill="url(#oro)"/>
+                    <rect x="-12" y="36" width="24" height="4" fill="#9b9b9b"/>
+                  </g>
+                
+                  <!-- balda inferior con la huella limpia que dejó la peana en el polvo -->
+                  <rect x="122" y="280" width="196" height="4" class="balda"/>
+                  <rect x="186" y="277" width="68" height="3" rx="1" fill="#a9d3c3" opacity="0.55"/>
+                
+                  <!-- silueta del trofeo desaparecido -->
+                  <g transform="translate(220 158) scale(0.86)">
+                <g class="copa-hueco">
+                <path class="asa" stroke-width="2.5" d="M-47,12 C-80,10 -82,54 -30,58"/>
+                <path class="asa" stroke-width="2.5" d="M47,12 C80,10 82,54 30,58"/>
+                <rect class="peana" x="-38" y="114" width="76" height="26" rx="2"/>
+                <path class="metal" d="M-24,100 H24 L31,114 H-31 Z"/>
+                <path class="metal" d="M-7,72 H7 L9,100 H-9 Z"/>
+                <ellipse class="metal" cx="0" cy="85" rx="12" ry="5"/>
+                <path class="metal" d="M-50,0 H50 C50,42 34,64 12,72 L-12,72 C-34,64 -50,42 -50,0 Z"/>
+                <ellipse class="boca" cx="0" cy="0" rx="50" ry="6"/>
+                </g>
+                  </g>
+                
+                  <!-- reflejos del cristal -->
+                  <path d="M122,250 L210,40 L236,40 L148,284 L122,284 Z" fill="#ffffff" opacity="0.06"/>
+                  <path d="M250,284 L318,120 L318,160 L266,284 Z" fill="#ffffff" opacity="0.05"/>
+                </g>
+                <rect x="321" y="150" width="5" height="18" rx="1.5" class="cerradura"/>
+                
+                <!-- zócalo de madera con placa -->
+                <rect x="104" y="290" width="232" height="56" rx="3" fill="url(#madera)"/>
+                <rect x="104" y="290" width="232" height="6" fill="#8d6340"/>
+                <rect x="172" y="306" width="96" height="26" rx="2" fill="url(#oro)"/>
+                <text x="220" y="323" text-anchor="middle" class="placa-texto">Robótica 2026</text>
+                
+                <!-- foto clavada: así era el trofeo -->
+                <g transform="translate(14 150) rotate(-8)">
+                  <rect x="0" y="0" width="134" height="160" rx="2" class="foto"/>
+                  <rect x="10" y="10" width="114" height="112" fill="#24343f"/>
+                  <ellipse cx="67" cy="118" rx="44" ry="6" fill="#000" opacity="0.35"/>
+                  <g transform="translate(67 30) scale(0.6)">
+                <g class="copa-oro">
+                <path class="asa" stroke-width="7" d="M-47,12 C-80,10 -82,54 -30,58"/>
+                <path class="asa" stroke-width="7" d="M47,12 C80,10 82,54 30,58"/>
+                <rect class="peana" x="-38" y="114" width="76" height="26" rx="2"/>
+                <path class="metal" d="M-24,100 H24 L31,114 H-31 Z"/>
+                <path class="metal" d="M-7,72 H7 L9,100 H-9 Z"/>
+                <ellipse class="metal" cx="0" cy="85" rx="12" ry="5"/>
+                <path class="metal" d="M-50,0 H50 C50,42 34,64 12,72 L-12,72 C-34,64 -50,42 -50,0 Z"/>
+                <ellipse class="boca" cx="0" cy="0" rx="50" ry="6"/>
+                <path class="brillo" d="M-38,8 C-38,34 -28,52 -14,62 C-30,48 -33,30 -31,8 Z"/>
+                <path class="estrella" d="M0,18 L4.7,28.5 L16,29.6 L7.5,37 L10,48 L0,42.3 L-10,48 L-7.5,37 L-16,29.6 L-4.7,28.5 Z"/>
+                <rect class="placa-copa" x="-20" y="121" width="40" height="11" rx="1.5"/>
+                </g>
+                  </g>
+                  <text x="67" y="146" text-anchor="middle" class="foto-texto">1.er premio</text>
+                  <rect x="44" y="-9" width="46" height="17" transform="rotate(4 67 0)" class="cinta"/>
+                </g>
+                </svg>
+                <p class="sello" id="sello" role="status">Caso abierto</p>
+            </figure>
+        </div>
+    </header>
+
+    <main class="contenedor">
+
+        <!-- 1. EL CASO -->
+        <section id="caso" class="hoja" aria-labelledby="t-caso">
+            <p class="paso" aria-hidden="true">1</p>
+            <h2 id="t-caso">El caso</h2>
+            <div class="informe">
+                <p>
+                    El <mark>5 de marzo de 2026</mark> desapareció de la vitrina del <mark>hall del instituto</mark>
+                    el trofeo del concurso de robótica. Jefatura de estudios abrió un parte de incidencia, pero el
+                    parte se ha traspapelado entre los cientos que hay en la base de datos del centro.
+                </p>
+                <p>
+                    Tu trabajo es encontrar ese parte, seguir las pistas que contiene y averiguar
+                    <strong>quién se llevó el trofeo</strong>. Cuando creas saberlo, comprueba tu respuesta
+                    en la última sección de la página.
+                </p>
+            </div>
+            <aside class="nota">
+                <p><strong>Pista técnica.</strong> Las fechas se guardan como números enteros con el formato
+                    <code>AAAAMMDD</code>. Por ejemplo, el 5 de marzo de 2026 se escribe <code>20260305</code>.</p>
+            </aside>
+        </section>
+
+        <!-- 2. CÓMO SE RESUELVE -->
+        <section id="metodo" class="hoja" aria-labelledby="t-metodo">
+            <p class="paso" aria-hidden="true">2</p>
+            <h2 id="t-metodo">Cómo se resuelve</h2>
+            <p>
+                Cada pista está en una tabla distinta y se obtiene con <strong>una consulta a una sola
+                tabla</strong>. El truco consiste en <em>encadenar</em>: sacas un dato de una consulta,
+                lo apuntas y lo usas en la siguiente.
+            </p>
+            <ol class="pasos">
+                <li>Localiza el parte de incidencia del robo en <code>parte_incidencia</code>.</li>
+                <li>Léelo con atención: te dice cómo identificar a los dos testigos.</li>
+                <li>Busca a esos testigos en <code>persona</code> y apunta sus <code>id</code>.</li>
+                <li>Consulta sus declaraciones en <code>declaracion</code>.</li>
+                <li>Cada declaración apunta a una tabla distinta. Cruza los resultados a mano.</li>
+            </ol>
+
+            <details class="bloque chuleta-bloque">
+                <summary>Recordatorio de comandos SQL</summary>
+                <div class="chuleta-scroll">
+                    <table class="chuleta">
+                        <thead>
+                            <tr><th scope="col">Para…</th><th scope="col">Se escribe</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Ver una tabla entera</td><td><code>SELECT * FROM persona;</code></td></tr>
+                            <tr><td>Ver solo algunas columnas</td><td><code>SELECT nombre, grupo FROM persona;</code></td></tr>
+                            <tr><td>Filtrar filas</td><td><code>SELECT * FROM persona WHERE grupo = '2ESO-A';</code></td></tr>
+                            <tr><td>Varias condiciones a la vez</td><td><code>… WHERE grupo = '2ESO-A' AND numero &gt; 20;</code></td></tr>
+                            <tr><td>Texto que empieza por algo</td><td><code>… WHERE nombre LIKE 'Marisol%';</code></td></tr>
+                            <tr><td>Texto que contiene algo</td><td><code>… WHERE texto LIKE '%gimnasio%';</code></td></tr>
+                            <tr><td>Ordenar de mayor a menor</td><td><code>… ORDER BY num_lista DESC;</code></td></tr>
+                            <tr><td>Quedarte solo con la primera fila</td><td><code>… ORDER BY num_lista DESC LIMIT 1;</code></td></tr>
+                            <tr><td>Buscar entre varios valores</td><td><code>… WHERE id_persona IN (12, 45, 78);</code></td></tr>
+                            <tr><td>Contar filas</td><td><code>SELECT COUNT(*) FROM persona;</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="nota">
+                    El texto entre comillas distingue mayúsculas de minúsculas y tildes:
+                    <code>'Cordoba'</code> no es lo mismo que <code>'córdoba'</code>. En esta base de datos
+                    ningún dato lleva tilde.
+                </p>
+            </details>
+        </section>
+
+        <!-- 3. ESQUEMA -->
+        <section id="esquema" class="hoja hoja-ancha" aria-labelledby="t-esquema">
+            <p class="paso" aria-hidden="true">3</p>
+            <h2 id="t-esquema">Esquema de la base de datos</h2>
+            <p>
+                Estas son las tablas del centro y cómo se relacionan entre sí. Fíjate en que
+                <code>declaracion</code>, <code>socio_gimnasio</code> e <code>inscripcion_excursion</code>
+                guardan un <code>id_persona</code>: es la clave ajena que apunta al <code>id</code> de
+                <code>persona</code>. Pasa el ratón por encima de una tabla (o selecciónala con el tabulador)
+                para ver sus relaciones.
+            </p>
+            <ul class="leyenda">
+                <li><span class="clave-muestra clave-pk">PK</span> clave primaria</li>
+                <li><span class="clave-muestra clave-fk">FK</span> clave ajena: apunta a la clave primaria de otra tabla</li>
+                <li><span class="tabla-muestra"></span> por aquí empieza la investigación</li>
+            </ul>
+            <div class="esquema-marco">
+                <svg class="esquema-svg" viewBox="0 0 974 440" role="img" aria-labelledby="esquema-titulo esquema-desc" xmlns="http://www.w3.org/2000/svg">
+                <title id="esquema-titulo">Esquema de la base de datos</title>
+                <desc id="esquema-desc">Seis tablas. declaracion, socio_gimnasio e inscripcion_excursion tienen una columna id_persona que apunta al id de persona. parte_incidencia y solucion no se relacionan con ninguna otra tabla.</desc>
+                <defs><marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="punta" d="M0,0 L10,5 L0,10 z"/></marker><marker id="flecha-activa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="punta-activa" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+                <g class="relaciones">
+                <path class="relacion" data-tablas="declaracion persona" d="M700,78.0 H670 V154.0 H605"/>
+                <path class="relacion" data-tablas="socio_gimnasio persona" d="M700,212.0 H670 V154.0 H605"/>
+                <path class="relacion" data-tablas="inscripcion_excursion persona" d="M700,370.0 H670 V154.0 H605"/>
+                </g>
+                <g class="tabla tabla-inicio" data-tabla="parte_incidencia" tabindex="0">
+                <rect class="tabla-cuerpo" x="10" y="20" width="264" height="152" rx="3"/>
+                <rect class="tabla-cabecera" x="10" y="20" width="264" height="32" rx="3"/>
+                <rect class="tabla-cabecera" x="10" y="48" width="264" height="4"/>
+                <text class="tabla-nombre" x="22" y="41">parte_incidencia</text>
+                <text class="clave clave-pk" x="20" y="68">PK</text>
+                <text class="columna columna-clave" x="46" y="68">id</text>
+                <text class="tipo" x="264" y="68" text-anchor="end">INTEGER</text>
+                <rect class="fila-par" x="11" y="76" width="262" height="24"/>
+                <text class="columna" x="46" y="92">fecha</text>
+                <text class="tipo" x="264" y="92" text-anchor="end">INTEGER</text>
+                <text class="columna" x="46" y="116">tipo</text>
+                <text class="tipo" x="264" y="116" text-anchor="end">TEXT</text>
+                <rect class="fila-par" x="11" y="124" width="262" height="24"/>
+                <text class="columna" x="46" y="140">lugar</text>
+                <text class="tipo" x="264" y="140" text-anchor="end">TEXT</text>
+                <text class="columna" x="46" y="164">descripcion</text>
+                <text class="tipo" x="264" y="164" text-anchor="end">TEXT</text>
+                </g>
+                <g class="tabla tabla-aislada" data-tabla="solucion" tabindex="0">
+                <rect class="tabla-cuerpo" x="10" y="250" width="264" height="80" rx="3"/>
+                <rect class="tabla-cabecera" x="10" y="250" width="264" height="32" rx="3"/>
+                <rect class="tabla-cabecera" x="10" y="278" width="264" height="4"/>
+                <text class="tabla-nombre" x="22" y="271">solucion</text>
+                <text class="columna" x="46" y="298">usuario</text>
+                <text class="tipo" x="264" y="298" text-anchor="end">INTEGER</text>
+                <rect class="fila-par" x="11" y="306" width="262" height="24"/>
+                <text class="columna" x="46" y="322">valor</text>
+                <text class="tipo" x="264" y="322" text-anchor="end">TEXT</text>
+                </g>
+                <g class="tabla" data-tabla="persona" tabindex="0">
+                <rect class="tabla-cuerpo" x="340" y="110" width="264" height="176" rx="3"/>
+                <rect class="tabla-cabecera" x="340" y="110" width="264" height="32" rx="3"/>
+                <rect class="tabla-cabecera" x="340" y="138" width="264" height="4"/>
+                <text class="tabla-nombre" x="352" y="131">persona</text>
+                <text class="clave clave-pk" x="350" y="158">PK</text>
+                <text class="columna columna-clave" x="376" y="158">id</text>
+                <text class="tipo" x="594" y="158" text-anchor="end">INTEGER</text>
+                <rect class="fila-par" x="341" y="166" width="262" height="24"/>
+                <text class="columna" x="376" y="182">nombre</text>
+                <text class="tipo" x="594" y="182" text-anchor="end">TEXT</text>
+                <text class="columna" x="376" y="206">grupo</text>
+                <text class="tipo" x="594" y="206" text-anchor="end">TEXT</text>
+                <rect class="fila-par" x="341" y="214" width="262" height="24"/>
+                <text class="columna" x="376" y="230">num_lista</text>
+                <text class="tipo" x="594" y="230" text-anchor="end">INTEGER</text>
+                <text class="columna" x="376" y="254">calle</text>
+                <text class="tipo" x="594" y="254" text-anchor="end">TEXT</text>
+                <rect class="fila-par" x="341" y="262" width="262" height="24"/>
+                <text class="columna" x="376" y="278">numero</text>
+                <text class="tipo" x="594" y="278" text-anchor="end">INTEGER</text>
+                </g>
+                <g class="tabla" data-tabla="declaracion" tabindex="0">
+                <rect class="tabla-cuerpo" x="700" y="10" width="264" height="104" rx="3"/>
+                <rect class="tabla-cabecera" x="700" y="10" width="264" height="32" rx="3"/>
+                <rect class="tabla-cabecera" x="700" y="38" width="264" height="4"/>
+                <text class="tabla-nombre" x="712" y="31">declaracion</text>
+                <text class="clave clave-pk" x="710" y="58">PK</text>
+                <text class="columna columna-clave" x="736" y="58">id</text>
+                <text class="tipo" x="954" y="58" text-anchor="end">INTEGER</text>
+                <rect class="fila-par" x="701" y="66" width="262" height="24"/>
+                <text class="clave clave-fk" x="710" y="82">FK</text>
+                <text class="columna columna-clave" x="736" y="82">id_persona</text>
+                <text class="tipo" x="954" y="82" text-anchor="end">INTEGER</text>
+                <text class="columna" x="736" y="106">texto</text>
+                <text class="tipo" x="954" y="106" text-anchor="end">TEXT</text>
+                </g>
+                <g class="tabla" data-tabla="socio_gimnasio" tabindex="0">
+                <rect class="tabla-cuerpo" x="700" y="144" width="264" height="128" rx="3"/>
+                <rect class="tabla-cabecera" x="700" y="144" width="264" height="32" rx="3"/>
+                <rect class="tabla-cabecera" x="700" y="172" width="264" height="4"/>
+                <text class="tabla-nombre" x="712" y="165">socio_gimnasio</text>
+                <text class="clave clave-pk" x="710" y="192">PK</text>
+                <text class="columna columna-clave" x="736" y="192">codigo</text>
+                <text class="tipo" x="954" y="192" text-anchor="end">TEXT</text>
+                <rect class="fila-par" x="701" y="200" width="262" height="24"/>
+                <text class="clave clave-fk" x="710" y="216">FK</text>
+                <text class="columna columna-clave" x="736" y="216">id_persona</text>
+                <text class="tipo" x="954" y="216" text-anchor="end">INTEGER</text>
+                <text class="columna" x="736" y="240">fecha_alta</text>
+                <text class="tipo" x="954" y="240" text-anchor="end">INTEGER</text>
+                <rect class="fila-par" x="701" y="248" width="262" height="24"/>
+                <text class="columna" x="736" y="264">estado</text>
+                <text class="tipo" x="954" y="264" text-anchor="end">TEXT</text>
+                </g>
+                <g class="tabla" data-tabla="inscripcion_excursion" tabindex="0">
+                <rect class="tabla-cuerpo" x="700" y="302" width="264" height="128" rx="3"/>
+                <rect class="tabla-cabecera" x="700" y="302" width="264" height="32" rx="3"/>
+                <rect class="tabla-cabecera" x="700" y="330" width="264" height="4"/>
+                <text class="tabla-nombre" x="712" y="323">inscripcion_excursion</text>
+                <text class="clave clave-pk" x="710" y="350">PK</text>
+                <text class="columna columna-clave" x="736" y="350">id</text>
+                <text class="tipo" x="954" y="350" text-anchor="end">INTEGER</text>
+                <rect class="fila-par" x="701" y="358" width="262" height="24"/>
+                <text class="clave clave-fk" x="710" y="374">FK</text>
+                <text class="columna columna-clave" x="736" y="374">id_persona</text>
+                <text class="tipo" x="954" y="374" text-anchor="end">INTEGER</text>
+                <text class="columna" x="736" y="398">destino</text>
+                <text class="tipo" x="954" y="398" text-anchor="end">TEXT</text>
+                <rect class="fila-par" x="701" y="406" width="262" height="24"/>
+                <text class="columna" x="736" y="422">fecha</text>
+                <text class="tipo" x="954" y="422" text-anchor="end">INTEGER</text>
+                </g>
+                </svg>
+            </div>
+            <p class="desliza">Desliza el diagrama hacia los lados para verlo completo.</p>
+        </section>
+
+        <!-- 4. EDITOR -->
+        <section id="editor" class="hoja" aria-labelledby="t-editor">
+            <p class="paso" aria-hidden="true">4</p>
+            <h2 id="t-editor">Editor SQL</h2>
+            <p>
+                Escribe aquí tus consultas y pulsa <strong>Ejecutar</strong> (o <kbd>Mayús</kbd> + <kbd>Intro</kbd>).
+                Puedes usar este editor tantas veces como quieras: borra la consulta anterior y prueba otra.
+            </p>
+
+            <sql-exercise
+                data-question="Investiga el caso"
+                data-comment="Empieza por buscar el parte de incidencia del robo."
+                data-default-text="SELECT *
+FROM parte_incidencia
+WHERE fecha = 20260305;"></sql-exercise>
+
+            <div class="pistas">
+                <p class="pistas-intro">
+                    ¿Atascado? Abre las pistas de una en una, solo cuando de verdad las necesites.
+                </p>
+
+                <details class="bloque pista">
+                    <summary><span class="pista-num">Pista 1</span> No encuentro el parte del robo</summary>
+                    <p>
+                        Con la fecha sola salen varias filas. Añade dos condiciones más con <code>AND</code>:
+                        el <code>tipo</code> de incidencia que buscas es <code>'robo'</code> y el
+                        <code>lugar</code> es <code>'Hall del instituto'</code>.
+                    </p>
+                    <p>
+                        Saldrán dos partes. Uno de ellos no sirve: fíjate en cuál tiene una descripción de verdad.
+                    </p>
+                </details>
+
+                <details class="bloque pista">
+                    <summary><span class="pista-num">Pista 2</span> No sé identificar a los testigos</summary>
+                    <p>
+                        El primer testigo es de <code>1BACH-B</code> y tiene el <code>num_lista</code> más alto
+                        de su grupo: filtra por el grupo, ordena con <code>ORDER BY num_lista DESC</code> y
+                        quédate con la primera fila usando <code>LIMIT 1</code>.
+                    </p>
+                    <p>
+                        La segunda testigo se llama Marisol, pero hay varias en el instituto. Combina
+                        <code>nombre LIKE 'Marisol%'</code> con la calle en la que vive.
+                    </p>
+                </details>
+
+                <details class="bloque pista">
+                    <summary><span class="pista-num">Pista 3</span> Ya tengo los testigos, ¿y ahora?</summary>
+                    <p>
+                        Apunta el <code>id</code> de cada uno y búscalos en la tabla de declaraciones:
+                        <code>SELECT texto FROM declaracion WHERE id_persona = …;</code>
+                    </p>
+                    <p>
+                        Una declaración te da el principio de un código de la tabla
+                        <code>socio_gimnasio</code>. La otra te da un destino y una fecha de la tabla
+                        <code>inscripcion_excursion</code>.
+                    </p>
+                </details>
+
+                <details class="bloque pista">
+                    <summary><span class="pista-num">Pista 4</span> Tengo las dos listas y no sé cruzarlas</summary>
+                    <p>
+                        Saca primero los seis socios cuyo código empieza por <code>GB7</code> y apunta sus
+                        <code>id_persona</code>. Solo una de esas seis personas fue a la excursión.
+                    </p>
+                    <p>
+                        Puedes comprobarlo de dos maneras: lanzando seis consultas (una por candidato) o,
+                        más rápido, con <code>IN</code>: filtra la excursión y añade
+                        <code>AND id_persona IN (…)</code> con los seis números separados por comas.
+                    </p>
+                </details>
+            </div>
+        </section>
+
+        <!-- 5. COMPROBAR -->
+        <section id="comprobar" class="hoja" aria-labelledby="t-comprobar">
+            <p class="paso" aria-hidden="true">5</p>
+            <h2 id="t-comprobar">Comprueba tu solución</h2>
+            <p>
+                Sustituye el texto entre comillas por el nombre completo de tu sospechoso y ejecuta las
+                dos sentencias juntas.
+            </p>
+            <sql-exercise
+                data-question="¿Quién se llevó el trofeo?"
+                data-comment="Da igual si escribes en mayúsculas o en minúsculas."
+                data-default-text="INSERT INTO solucion VALUES (1, 'Escribe aquí el nombre completo');
+
+SELECT valor FROM solucion;"></sql-exercise>
+        </section>
+
+        <footer id="creditos">
+            <p>
+                Diseñado por Juan Luis Torralbo Muñoz. Caso de iniciación inspirado en el
+                <a href="https://mystery.knightlab.com/">SQL Murder Mystery</a> del Knight Lab de la
+                Universidad Northwestern (Joon Park y Cathy He; producido para la web por Joe Germuska),
+                y pensado como paso previo a
+                <a href="https://juanlu101.github.io/Asesinato-Base-de-Datos/">El misterio del asesinato en SQL</a>.
+                El SQL funciona en el navegador gracias a
+                <a href="https://github.com/sql-js/sql.js/">SQL.js</a>; los componentes del editor son de
+                Zi Chong Kao (<a href="https://selectstarsql.com/">Select Star SQL</a>).
+                Tipografías Courier Prime, Public Sans y JetBrains Mono, bajo licencia SIL Open Font License.
+                Código bajo licencia MIT; textos y contenido bajo
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es">CC BY-SA 4.0</a>.
+            </p>
+        </footer>
+
+    </main>
+</body>
+
+</html>

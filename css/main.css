@@ -1,0 +1,708 @@
+/* ------------------------------------------------------------------
+   El misterio del trofeo robado — hoja de estilos
+   Estética de parte de incidencia del instituto (misma familia visual
+   que «El misterio del asesinato en SQL», con acento verde). Sin dependencias externas:
+   las tipografías están en la carpeta fonts/ (licencia SIL OFL).
+------------------------------------------------------------------- */
+
+/* Tipografías */
+
+@font-face {
+    font-family: 'Courier Prime';
+    src: url('../fonts/courier-prime-latin-400-normal.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Courier Prime';
+    src: url('../fonts/courier-prime-latin-700-normal.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../fonts/public-sans-latin-400-normal.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../fonts/public-sans-latin-400-italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../fonts/public-sans-latin-600-normal.woff2') format('woff2');
+    font-weight: 600;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Public Sans';
+    src: url('../fonts/public-sans-latin-700-normal.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('../fonts/jetbrains-mono-latin-400-normal.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('../fonts/jetbrains-mono-latin-700-normal.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+
+/* Paleta y medidas */
+
+:root {
+    --papel: #e3eae6;        /* fondo: papel de oficina gris verdoso */
+    --hoja: #fbfcfd;         /* hojas del expediente */
+    --tinta: #12302a;        /* verde botella de tinta */
+    --tinta-suave: #4a5f57;
+    --linea: #c3d1ca;
+    --linea-suave: #e1e9e5;
+    --sello: #b42318;        /* rojo de sello de caucho */
+    --sello-claro: #fbeae8;
+    --verde: #1f6b45;
+    --oro: #c8962e;
+    --verde-claro: #e6f2ea;
+    --rotulador: #ffe27a;    /* rotulador fluorescente */
+
+    --maquina: 'Courier Prime', 'Courier New', monospace;
+    --texto: 'Public Sans', 'Segoe UI', system-ui, sans-serif;
+    --codigo: 'JetBrains Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+    color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    font-family: var(--texto);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--tinta);
+    background: var(--papel);
+}
+
+h1, h2 {
+    font-family: var(--maquina);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+}
+
+p { margin: 0 0 1em; }
+
+a { color: var(--tinta); text-decoration-color: var(--sello); text-underline-offset: 0.18em; }
+a:hover { color: var(--sello); }
+
+:focus-visible { outline: 3px solid var(--sello); outline-offset: 3px; }
+
+code, kbd {
+    font-family: var(--codigo);
+    font-size: 0.85em;
+}
+
+code {
+    background: var(--linea-suave);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+}
+
+kbd {
+    border: 1px solid var(--linea);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    padding: 0 0.35em;
+    background: var(--hoja);
+}
+
+/* ------------------------------------------------------------------
+   Portada del expediente
+------------------------------------------------------------------- */
+
+.portada {
+    background: var(--tinta);
+    color: var(--hoja);
+    padding: clamp(2rem, 6vw, 4rem) 1rem clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.portada-interior {
+    max-width: 64rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: center;
+}
+
+.expediente {
+    font-family: var(--maquina);
+    font-size: 1rem;
+    color: #a9c4b8;
+    margin: 0 0 1.25rem;
+}
+
+.expediente span {
+    display: block;
+    color: #7c9a8d;
+}
+
+.portada h1 {
+    font-size: clamp(2.2rem, 6vw, 3.9rem);
+    margin: 0;
+    max-width: 16ch;
+}
+
+.lema {
+    font-size: 1.2rem;
+    color: #c6d9d0;
+    margin: 1.25rem 0 0;
+}
+
+.autor {
+    margin: 1.75rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid #2f5248;
+    font-size: 1rem;
+    color: #a9c4b8;
+}
+
+.autor strong {
+    display: block;
+    margin-top: 0.15rem;
+    font-family: var(--maquina);
+    font-size: clamp(1.35rem, 2.6vw, 1.6rem);
+    font-weight: 700;
+    color: var(--hoja);
+}
+
+.portada-imagen {
+    position: relative;
+    margin: 0;
+}
+
+.portada-imagen img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+/* Ilustración de la vitrina (SVG en línea) */
+
+.vitrina { display: block; width: 100%; height: auto; }
+.vitrina .marco { fill: #c9d8d0; }
+.vitrina .balda { fill: #9fc2b3; opacity: 0.55; }
+.vitrina .cerradura { fill: #e2b04a; }
+.vitrina .placa-texto { font-family: var(--maquina); font-weight: 700; font-size: 13px; fill: #4a2f08; }
+.vitrina .foto { fill: #f7f5ef; }
+.vitrina .foto-texto { font-family: var(--maquina); font-weight: 700; font-size: 14px; fill: #3a3a3a; }
+.vitrina .cinta { fill: var(--rotulador); opacity: 0.8; }
+
+.copa-oro .metal { fill: url(#oro); }
+.copa-oro .asa { fill: none; stroke: url(#oro); stroke-linecap: round; }
+.copa-oro .boca { fill: url(#boca); }
+.copa-oro .peana { fill: #1c1c1c; }
+.copa-oro .brillo { fill: #fff; opacity: 0.45; }
+.copa-oro .estrella { fill: #a8721a; opacity: 0.85; }
+.copa-oro .placa-copa { fill: #c9a24a; }
+
+.copa-hueco > * {
+    fill: none;
+    stroke: #d9efe6;
+    stroke-width: 2.5;
+    stroke-dasharray: 6 5;
+    stroke-linecap: round;
+    opacity: 0.85;
+}
+
+/* El sello: el único elemento llamativo de la página */
+
+.sello {
+    position: absolute;
+    right: -0.25rem;
+    top: 0.5rem;
+    margin: 0;
+    padding: 0.35em 0.7em;
+    font-family: var(--maquina);
+    font-weight: 700;
+    font-size: clamp(1.2rem, 2.6vw, 1.7rem);
+    line-height: 1;
+    color: var(--sello);
+    background: rgba(251, 252, 253, 0.92);
+    border: 4px double var(--sello);
+    border-radius: 6px;
+    transform: rotate(-7deg);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    box-shadow: 0 6px 18px rgba(4, 20, 16, 0.4);
+    animation: estampar 520ms cubic-bezier(.2, .9, .3, 1.25) 350ms both;
+}
+
+.sello.cerrado {
+    color: var(--verde);
+    border-color: var(--verde);
+}
+
+.sello.reestampar { animation: estampar 520ms cubic-bezier(.2, .9, .3, 1.25) both; }
+
+@keyframes estampar {
+    0%   { opacity: 0; transform: rotate(-16deg) scale(1.9); }
+    70%  { opacity: 1; transform: rotate(-6deg) scale(0.96); }
+    100% { opacity: 1; transform: rotate(-7deg) scale(1); }
+}
+
+/* ------------------------------------------------------------------
+   Hojas del expediente
+------------------------------------------------------------------- */
+
+.contenedor {
+    max-width: 74rem;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 3rem) 1rem 3rem;
+}
+
+.hoja {
+    position: relative;
+    max-width: 48rem;
+    margin: 0 auto 2rem;
+    background: var(--hoja);
+    border: 1px solid var(--linea);
+    border-radius: 4px;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    padding-left: clamp(1.25rem, 6vw, 4.5rem);
+}
+
+.hoja-ancha { max-width: 74rem; }
+
+.hoja h2 {
+    font-size: clamp(1.5rem, 3.4vw, 1.9rem);
+    margin: 0 0 1rem;
+}
+
+/* Número de paso en el margen, como en un formulario mecanografiado */
+.paso {
+    position: absolute;
+    left: clamp(1.25rem, 2.2vw, 1.75rem);
+    top: clamp(1.25rem, 4vw, 2.5rem);
+    margin: 0;
+    font-family: var(--maquina);
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1.6rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    text-align: center;
+    border: 2px solid var(--tinta);
+    border-radius: 50%;
+}
+
+.informe {
+    font-family: var(--maquina);
+    font-size: 1.125rem;
+    line-height: 1.7;
+    max-width: 62ch;
+}
+
+mark {
+    background: linear-gradient(transparent 12%, var(--rotulador) 12%, var(--rotulador) 88%, transparent 88%);
+    color: inherit;
+    padding: 0 0.15em;
+    font-weight: 700;
+}
+
+.nota {
+    margin-top: 1.5rem;
+    padding: 0.9rem 1.1rem;
+    background: var(--papel);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: var(--tinta-suave);
+}
+
+.nota p { margin: 0; }
+.nota strong { color: var(--tinta); }
+
+/* Pasos del método */
+
+.pasos {
+    list-style: none;
+    counter-reset: paso;
+    padding: 0;
+    margin: 1.25rem 0 1.5rem;
+}
+
+.pasos li {
+    counter-increment: paso;
+    position: relative;
+    padding: 0.55rem 0 0.55rem 2.5rem;
+    border-bottom: 1px dashed var(--linea);
+}
+
+.pasos li:last-child { border-bottom: 0; }
+
+.pasos li::before {
+    content: counter(paso, upper-alpha);
+    position: absolute;
+    left: 0;
+    top: 0.55rem;
+    font-family: var(--maquina);
+    font-weight: 700;
+    color: var(--sello);
+}
+
+/* Bloques desplegables: chuleta y pistas */
+
+details.bloque {
+    border: 1px solid var(--linea);
+    border-radius: 4px;
+    background: #fff;
+    margin: 0.6rem 0;
+}
+
+details.bloque > summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+}
+
+details.bloque > summary::-webkit-details-marker { display: none; }
+
+details.bloque > summary::after {
+    content: "+";
+    margin-left: auto;
+    font-family: var(--codigo);
+    font-weight: 700;
+    color: var(--tinta-suave);
+}
+
+details.bloque[open] > summary::after { content: "−"; }
+details.bloque > summary:hover { background: var(--linea-suave); }
+details.bloque[open] > summary { border-bottom: 1px solid var(--linea-suave); }
+details.bloque > p, details.bloque > div { margin: 0.75rem 1rem; }
+details.bloque > p:last-child { margin-bottom: 1rem; }
+
+.pistas { margin-top: 2rem; }
+.pistas-intro { color: var(--tinta-suave); }
+
+.pista { border-left: 4px solid var(--rotulador); }
+
+.pista-num {
+    flex: none;
+    font-family: var(--maquina);
+    font-weight: 700;
+    color: var(--sello);
+}
+
+details.pista > p { font-size: 0.97rem; }
+
+.chuleta-bloque .nota { margin: 0.25rem 1rem 1rem; }
+.chuleta-scroll { overflow-x: auto; }
+
+.chuleta {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+.chuleta th, .chuleta td {
+    padding: 0.5rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--linea-suave);
+}
+
+.chuleta th { font-size: 0.85rem; color: var(--tinta-suave); font-weight: 600; }
+.chuleta td:last-child { white-space: nowrap; }
+.chuleta code { background: none; padding: 0; color: #23508f; }
+
+/* ------------------------------------------------------------------
+   Esquema (SVG)
+------------------------------------------------------------------- */
+
+.leyenda {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    color: var(--tinta-suave);
+}
+
+.leyenda li { display: flex; align-items: center; gap: 0.45rem; }
+
+.clave-muestra {
+    font-family: var(--codigo);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.05em 0.35em;
+    border-radius: 3px;
+}
+
+.clave-muestra.clave-pk { background: var(--rotulador); color: var(--tinta); }
+.clave-muestra.clave-fk { background: #dbe6f5; color: #23508f; }
+
+.tabla-muestra {
+    display: inline-block;
+    width: 1.1rem;
+    height: 0.8rem;
+    background: var(--sello);
+    border-radius: 2px;
+}
+
+.esquema-marco {
+    overflow-x: auto;
+    border: 1px solid var(--linea);
+    border-radius: 4px;
+    background:
+        radial-gradient(circle, var(--linea) 1px, transparent 1.2px) 0 0 / 18px 18px,
+        var(--hoja);
+    padding: 0.75rem;
+}
+
+.esquema-svg {
+    display: block;
+    width: 100%;
+    min-width: 780px;
+    height: auto;
+    font-family: var(--codigo);
+}
+
+.esquema-svg .tabla { cursor: default; transition: opacity 160ms; outline: none; }
+.esquema-svg .tabla-cuerpo { fill: #fff; stroke: var(--tinta); stroke-width: 1.25; }
+.esquema-svg .tabla-cabecera { fill: var(--tinta); }
+.esquema-svg .tabla-inicio .tabla-cabecera { fill: var(--sello); }
+.esquema-svg .tabla-inicio .tabla-cuerpo { stroke: var(--sello); }
+.esquema-svg .tabla-aislada .tabla-cabecera { fill: var(--tinta-suave); }
+.esquema-svg .fila-par { fill: #f2f6f4; }
+.esquema-svg .tabla-nombre { fill: #fff; font-size: 14px; font-weight: 700; }
+.esquema-svg .columna { fill: var(--tinta); font-size: 13px; }
+.esquema-svg .columna-clave { font-weight: 700; }
+.esquema-svg .tipo { fill: #7d8a9b; font-size: 11.5px; }
+.esquema-svg .clave { font-size: 10px; font-weight: 700; }
+.esquema-svg .clave-pk { fill: #8a6a00; }
+.esquema-svg .clave-fk { fill: #23508f; }
+
+.esquema-svg .relacion {
+    fill: none;
+    stroke: #7d8a9b;
+    stroke-width: 1.5;
+    marker-end: url(#flecha);
+    transition: opacity 160ms;
+}
+.esquema-svg .punta { fill: #7d8a9b; }
+.esquema-svg .punta-activa { fill: var(--sello); }
+
+.esquema-svg.enfoque .tabla:not(.activa) { opacity: 0.3; }
+.esquema-svg.enfoque .relacion:not(.activa) { opacity: 0.15; }
+.esquema-svg .relacion.activa { stroke: var(--sello); stroke-width: 2.25; marker-end: url(#flecha-activa); }
+.esquema-svg .tabla.activa .tabla-cuerpo { stroke-width: 2; }
+
+.desliza {
+    display: none;
+    margin: 0.6rem 0 0;
+    font-size: 0.85rem;
+    color: var(--tinta-suave);
+}
+
+/* ------------------------------------------------------------------
+   Componente sql-exercise
+------------------------------------------------------------------- */
+
+sql-exercise { display: block; }
+
+sql-exercise .sqlExHomeDiv { margin-top: 1.25rem; }
+
+sql-exercise .sqlExQuestion {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+sql-exercise .sqlExComment {
+    font-size: 0.95rem;
+    color: var(--tinta-suave);
+}
+
+sql-exercise form { display: block; }
+
+sql-exercise .CodeMirror {
+    margin: 0.75rem 0;
+    border: 1px solid var(--linea);
+    border-radius: 4px;
+    font-family: var(--codigo);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--tinta);
+    background: #fff;
+}
+
+sql-exercise .CodeMirror-focused {
+    border-color: var(--tinta);
+    box-shadow: 0 0 0 3px rgba(18, 48, 42, 0.12);
+}
+
+sql-exercise .CodeMirror-gutters {
+    background: var(--papel);
+    border-right: 1px solid var(--linea);
+}
+
+sql-exercise .CodeMirror-linenumber { color: #8593a5; }
+sql-exercise .CodeMirror-cursor { border-left: 2px solid var(--sello); }
+
+/* Tema de colores del editor */
+.cm-s-expediente span.cm-keyword { color: #23508f; font-weight: 700; }
+.cm-s-expediente span.cm-string { color: var(--sello); }
+.cm-s-expediente span.cm-number,
+.cm-s-expediente span.cm-atom { color: var(--verde); }
+.cm-s-expediente span.cm-comment { color: #7d8a9b; font-style: italic; }
+.cm-s-expediente span.cm-builtin { color: #6a3d9a; font-weight: 700; }
+.cm-s-expediente span.cm-operator { color: var(--tinta-suave); }
+.cm-s-expediente span.cm-variable-2 { color: var(--tinta); }
+.cm-s-expediente .CodeMirror-matchingbracket { outline: 1px solid var(--tinta-suave); color: inherit !important; }
+.cm-s-expediente .CodeMirror-selected { background: #dbe6f5; }
+
+/* Botones */
+
+sql-exercise .sqlExInputArea input {
+    font-family: var(--texto);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 0 0.6rem 0.25rem 0;
+    padding: 0.5em 1.1em;
+    border-radius: 4px;
+    border: 1.5px solid var(--tinta);
+    background: transparent;
+    color: var(--tinta);
+    cursor: pointer;
+}
+
+sql-exercise .sqlExInputArea input:hover:not(:disabled) { background: var(--linea-suave); }
+
+sql-exercise .sqlExInputArea input.sql-exercise-submit {
+    background: var(--tinta);
+    color: var(--hoja);
+}
+
+sql-exercise .sqlExInputArea input.sql-exercise-submit:hover:not(:disabled) { background: #1f4a40; }
+sql-exercise .sqlExInputArea input:active:not(:disabled) { transform: translateY(1px); }
+sql-exercise .sqlExInputArea input:disabled { opacity: 0.45; cursor: progress; }
+
+/* Resultados */
+
+sql-exercise .sqlExOutputArea { max-width: 100%; }
+
+sql-exercise .returnOkay,
+sql-exercise .returnError { margin-top: 1rem; }
+
+sql-exercise .returnError {
+    color: var(--sello);
+    background: var(--sello-claro);
+    border-left: 4px solid var(--sello);
+    padding: 0.7rem 0.9rem;
+    font-family: var(--codigo);
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    border-radius: 0 4px 4px 0;
+}
+
+.tabla-scroll {
+    max-height: 32rem;
+    overflow: auto;
+    border: 1px solid var(--linea);
+    border-radius: 4px;
+}
+
+.datatable {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.9rem;
+    background: #fff;
+}
+
+.datatable th,
+.datatable td {
+    padding: 0.45rem 0.75rem;
+    border-bottom: 1px solid var(--linea-suave);
+    text-align: left;
+    vertical-align: top;
+}
+
+.datatable td { min-width: 6rem; }
+
+.datatable th {
+    position: sticky;
+    top: 0;
+    background: var(--tinta);
+    color: var(--hoja);
+    font-family: var(--codigo);
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.datatable td.numero { font-family: var(--codigo); font-size: 0.85rem; text-align: right; white-space: nowrap; min-width: 0; }
+.datatable tbody tr:nth-child(even) { background: #f4f7f5; }
+.datatable tbody tr:hover { background: #fff7cf; }
+
+.recuento {
+    margin: 0.5rem 0 0;
+    font-size: 0.85rem;
+    color: var(--tinta-suave);
+}
+
+.sin-datos { color: var(--tinta-suave); font-style: italic; }
+
+/* Veredicto de la sección de comprobación */
+
+#comprobar.acierto .tabla-scroll { border-color: var(--verde); }
+#comprobar.acierto .datatable td { background: var(--verde-claro); color: var(--verde); font-weight: 600; font-size: 1rem; }
+#comprobar.fallo .tabla-scroll { border-color: var(--sello); }
+#comprobar.fallo .datatable td { background: var(--sello-claro); color: var(--sello); font-weight: 600; font-size: 1rem; }
+#comprobar .datatable td { white-space: normal; }
+
+/* ------------------------------------------------------------------
+   Créditos
+------------------------------------------------------------------- */
+
+#creditos {
+    max-width: 48rem;
+    margin: 3rem auto 0;
+    font-size: 0.85rem;
+    color: var(--tinta-suave);
+}
+
+/* ------------------------------------------------------------------
+   Pantallas pequeñas y movimiento reducido
+------------------------------------------------------------------- */
+
+@media (max-width: 720px) {
+    .portada-interior { grid-template-columns: 1fr; }
+    .portada-imagen { max-width: 26rem; }
+    .portada h1 { max-width: none; }
+    .hoja { padding-top: 3.75rem; }
+    .paso { top: 1.25rem; }
+    .desliza { display: block; }
+    .informe { font-size: 1rem; line-height: 1.65; }
+    .esquema-marco { margin-right: calc(-1 * clamp(1.25rem, 4vw, 2.5rem)); border-right: 0; border-radius: 4px 0 0 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sello, .sello.reestampar { animation: none; }
+    .esquema-svg .tabla, .esquema-svg .relacion { transition: none; }
+}
