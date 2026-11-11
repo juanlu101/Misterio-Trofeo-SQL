@@ -12,20 +12,7 @@ el alumnado encadena resultados a mano.
 ---
 
 
-## Contenido
 
-| Archivo | Qué es |
-|---|---|
-| `index.html` | La página del caso (incluye en línea la ilustración de la vitrina y el diagrama del esquema) |
-| `misterio-trofeo.db` | Base de datos SQLite |
-| `generar_db.py` | Script que genera la base de datos (para regenerarla o modificar el caso) |
-| `css/main.css` | Estilos de la página |
-| `scripts/main.js` | Componente del editor SQL y tabla de resultados |
-| `scripts/pagina.js` | Interacciones de la página: relaciones del esquema al pasar el ratón, sello de «Caso cerrado» y tablero de pruebas animado que aparece al resolver el caso |
-| `fonts/` | Tipografías Courier Prime, Public Sans y JetBrains Mono (licencia SIL OFL), para que no dependa de servicios externos |
-
-Para regenerar la base de datos tras editar el script: `python3 generar_db.py`
-(no necesita librerías externas; el script se autocomprueba y aborta si la cadena de pistas se rompe).
 
 ---
 
